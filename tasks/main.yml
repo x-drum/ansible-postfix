@@ -1,0 +1,45 @@
+## install and configure postfix
+---
+- name: set OS dependent variables
+  tags:
+    - postfix
+    - prereq
+  include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_os_family }}.yml"
+   - default.yml
+
+- include: main_redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: main_debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: main_freebsd.yml
+  when: ansible_os_family == 'FreeBSD'
+
+- name: generate main.cf
+  tags:
+    - postfix
+    - configuration
+  template: src={{ postfix_main_template }} dest={{ postfix_config_directory }}/main.cf owner={{ default_owner }} group={{ default_group }} mode=0644
+  notify: restart postfix
+  when: postfix_os_supported == True
+
+- name: generate master.cf
+  tags:
+    - postfix
+    - configuration
+  template: src={{ postfix_master_template }} dest={{ postfix_config_directory }}/master.cf owner={{ default_owner }} group={{ default_group }} mode=0644
+  notify: restart postfix
+  when: postfix_os_supported == True
+
+- name: enable service
+  tags:
+    - postfix
+    - configuration
+  service: name={{ postfix_service_name }} enabled=yes state=started
+  when: postfix_os_supported == True

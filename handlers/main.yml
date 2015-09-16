@@ -1,0 +1,7 @@
+# handlers file for postfix
+---
+- name: restart postfix
+  tags: 
+    - postfix
+    - configuration
+  service: name={{ postfix_service_name }} state=restarted

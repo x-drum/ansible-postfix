@@ -1,0 +1,8 @@
+# RHEL related tasks
+---
+- name: install packages for RHEL
+  tags:
+    - postfix
+    - packages
+  yum: pkg={{item}} state=installed
+  with_items: postfix_package_names

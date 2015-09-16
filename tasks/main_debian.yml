@@ -1,0 +1,8 @@
+# Debian related tasks
+---
+- name: install packages for Debian
+  tags:
+    - postfix
+    - packages
+  apt: pkg={{item}} state=installed
+  with_items: postfix_package_names
