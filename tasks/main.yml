@@ -37,6 +37,22 @@
   notify: restart postfix
   when: postfix_os_supported == True
 
+- name: generate recipient_domains
+  tags:
+    - postfix
+    - configuration
+  template: src={{ postfix_whitelist_template }} dest={{ postfix_config_directory }}/recipient_domains owner={{ default_owner }} group={{ default_group }} mode=0644
+  notify: restart postfix
+  when: postfix_whitelist_enabled == True
+
+- name: generate hashed recipient_domains
+  tags:
+    - postfix
+    - configuration
+  shell: postmap {{ postfix_config_directory }}/recipient_domains
+  notify: restart postfix
+  when: postfix_whitelist_enabled == True
+
 - name: enable service
   tags:
     - postfix

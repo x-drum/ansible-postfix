@@ -6,6 +6,9 @@ postfix_user: postfix
 postfix_group: postfix
 postfix_master_template: master.cf.j2
 postfix_main_template: main.cf.j2
+postfix_whitelist_template: recipient_domains.j2
+postfix_whitelist_enabled: False
+postfix_whitelist: None
 postfix_main:
   - myhostname = {{ ansible_hostname }}
   - mydomain = {{ ansible_domain }}
