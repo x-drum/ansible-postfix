@@ -1,0 +1,16 @@
+# OpenBSD related tasks
+---
+- name: Disable OpenSMTPd
+  tags:
+    - postfix
+  service:
+    name: smtpd
+    enabled: no
+    state: stopped
+
+- name: install packages for OpenBSD
+  tags:
+    - postfix
+    - packages
+  openbsd_pkg: name={{item}} state=present
+  with_items: "{{ postfix_package_names }}"

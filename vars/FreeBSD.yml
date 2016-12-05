@@ -9,6 +9,7 @@ command_directory: /usr/local/sbin
 daemon_directory: /usr/local/libexec/postfix
 data_directory: /var/db/postfix
 mail_owner: postfix
+setgid_group: maildrop
 sendmail_path: /usr/local/sbin/sendmail
 newaliases_path: /usr/local/bin/newaliases
 mailq_path: /usr/local/bin/mailq

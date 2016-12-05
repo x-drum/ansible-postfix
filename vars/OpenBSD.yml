@@ -1,0 +1,16 @@
+# OpenBSD Family OS defaults
+---
+default_group: wheel
+postfix_config_directory: /etc/postfix
+postfix_package_names: postfix--sasl2%stable
+postfix_service_name: postfix
+queue_directory: /var/spool/postfix
+command_directory: /usr/local/sbin
+daemon_directory: /usr/local/libexec/postfix
+data_directory: /var/db/postfix
+mail_owner: _postfix
+setgid_group: _postdrop
+sendmail_path: /usr/sbin/sendmail
+newaliases_path: /usr/bin/newaliases
+mailq_path: /usr/bin/mailq
+postfix_os_supported: yes

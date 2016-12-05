@@ -12,14 +12,7 @@
    - "{{ ansible_os_family }}.yml"
    - default.yml
 
-- include: main_redhat.yml
-  when: ansible_os_family == 'RedHat'
-
-- include: main_debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include: main_freebsd.yml
-  when: ansible_os_family == 'FreeBSD'
+- include: "main_{{ ansible_os_family | lower }}.yml"
 
 - name: generate main.cf
   tags:
