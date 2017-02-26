@@ -12,14 +12,7 @@
    - "{{ ansible_os_family }}.yml"
    - default.yml
 
-- include: main_redhat.yml
-  when: ansible_os_family == 'RedHat'
-
-- include: main_debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include: main_freebsd.yml
-  when: ansible_os_family == 'FreeBSD'
+- include: "main_{{ ansible_os_family | lower }}.yml"
 
 - name: generate main.cf
   tags:
@@ -36,6 +29,22 @@
   template: src={{ postfix_master_template }} dest={{ postfix_config_directory }}/master.cf owner={{ default_owner }} group={{ default_group }} mode=0644
   notify: restart postfix
   when: postfix_os_supported == True
+
+- name: generate recipient_domains
+  tags:
+    - postfix
+    - configuration
+  template: src={{ postfix_whitelist_template }} dest={{ postfix_config_directory }}/recipient_domains owner={{ default_owner }} group={{ default_group }} mode=0644
+  notify: restart postfix
+  when: postfix_whitelist_enabled == True
+
+- name: generate hashed recipient_domains
+  tags:
+    - postfix
+    - configuration
+  shell: postmap {{ postfix_config_directory }}/recipient_domains
+  notify: restart postfix
+  when: postfix_whitelist_enabled == True
 
 - name: enable service
   tags:

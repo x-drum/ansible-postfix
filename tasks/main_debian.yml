@@ -5,4 +5,4 @@
     - postfix
     - packages
   apt: pkg={{item}} state=installed
-  with_items: postfix_package_names
+  with_items: "{{ postfix_package_names }}"

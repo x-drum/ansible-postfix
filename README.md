@@ -9,6 +9,7 @@ Supported Platforms
 * RHEL 6
 * Ubuntu 14.04 lts
 * FreeBSD 10
+* OpenBSD 6.0
 
 It will likely run on other platforms, just drop in vars/ a new file to support your os variant, vars are parsed in the following order/format:
 * {{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml
@@ -20,6 +21,7 @@ Requirements
 ------------
 
 * For FreeBSD a working pkgng setup is required (see: https://www.freebsd.org/doc/handbook/pkgng-intro.html )
+* For OpenBSD, you must have PKG_PATH or installpath in `/etc/pkg.conf` set. (see: https://www.openbsd.org/faq/faq15.html#Easy )
 
 
 Role Variables

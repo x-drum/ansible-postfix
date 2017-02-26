@@ -4,12 +4,20 @@ default_owner: root
 default_group: root
 postfix_user: postfix
 postfix_group: postfix
+setgid_group: postdrop
 postfix_master_template: master.cf.j2
 postfix_main_template: main.cf.j2
+postfix_whitelist_template: recipient_domains.j2
+postfix_whitelist_enabled: False
+postfix_whitelist: None
 postfix_main:
   - myhostname = {{ ansible_hostname }}
   - mydomain = {{ ansible_domain }}
   - myorigin = {{ ansible_hostname }}
+  - mail_owner = {{ mail_owner }}
+  - setgid_group = {{ setgid_group }}
+  - daemon_directory = {{ daemon_directory }}
+  - command_directory = {{ command_directory }}
   - inet_interfaces = localhost
   - inet_protocols = all
   - mydestination = localhost.localdomain, localhost, localdomain
