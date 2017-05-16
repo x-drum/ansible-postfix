@@ -3,11 +3,12 @@ galaxy_info:
   author: "Alessio Cassibba (x-drum)"
   description: Install and manage Postfix SMTP Server.
   license: GPLV2
-  min_ansible_version: 1.8
+  min_ansible_version: 2.0
   platforms:
    - name: EL
      versions:
       - 6
+      - 7
    - name: Ubuntu
      versions:
       - all
