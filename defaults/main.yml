@@ -30,30 +30,30 @@ default_postfix_main:
   default_destination_concurrency_limit: 2
   local_destination_concurrency_limit: 2
 default_postfix_master:
-  smtp: inet  n       -       n       -       -       smtpd
-  pickup: fifo  n       -       n       60      1       pickup
-  cleanup: unix  n       -       n       -       0       cleanup
-  qmgr: fifo  n       -       n       300     1       qmgr
-  tlsmgr: unix  -       -       n       1000?   1       tlsmgr
-  rewrite: unix  -       -       n       -       -       trivial-rewrite
-  bounce: unix  -       -       n       -       0       bounce
-  defer: unix  -       -       n       -       0       bounce
-  trace: unix  -       -       n       -       0       bounce
-  verify: unix  -       -       n       -       1       verify
-  flush: unix  n       -       n       1000?   0       flush
-  proxymap: unix  -       -       n       -       -       proxymap
-  proxywrite: unix -       -       n       -       1       proxymap
-  smtp: unix  -       -       n       -       -       smtp
-  relay: unix  -       -       n       -       -       smtp
-  showq: unix  n       -       n       -       -       showq
-  error: unix  -       -       n       -       -       error
-  retry: unix  -       -       n       -       -       error
-  discard: unix  -       -       n       -       -       discard
-  local: unix  -       n       n       -       -       local
-  virtual: unix  -       n       n       -       -       virtual
-  lmtp: unix  -       -       n       -       -       lmtp
-  anvil: unix  -       -       n       -       1       anvil
-  scache: unix  -       -       n       -       1       scache
+  smtp: smtp inet  n       -       n       -       -       smtpd
+  pickup: pickup fifo  n       -       n       60      1       pickup
+  cleanup: cleanup unix  n       -       n       -       0       cleanup
+  qmgr: qmgr fifo  n       -       n       300     1       qmgr
+  tlsmgr: tlsmgr unix  -       -       n       1000?   1       tlsmgr
+  rewrite: rewrite unix  -       -       n       -       -       trivial-rewrite
+  bounce: bounce unix  -       -       n       -       0       bounce
+  defer: defer unix  -       -       n       -       0       bounce
+  trace: trace unix  -       -       n       -       0       bounce
+  verify: verify unix  -       -       n       -       1       verify
+  flush: flush unix  n       -       n       1000?   0       flush
+  proxymap: proxymap unix  -       -       n       -       -       proxymap
+  proxywrite: proxywrite unix -       -       n       -       1       proxymap
+  smtp2: smtp unix  -       -       n       -       -       smtp
+  relay: relay unix  -       -       n       -       -       smtp
+  showq: showq unix  n       -       n       -       -       showq
+  error: error unix  -       -       n       -       -       error
+  retry: retry unix  -       -       n       -       -       error
+  discard: discard unix  -       -       n       -       -       discard
+  local: local unix  -       n       n       -       -       local
+  virtual: virtual unix  -       n       n       -       -       virtual
+  lmtp: lmtp unix  -       -       n       -       -       lmtp
+  anvil: anvil unix  -       -       n       -       1       anvil
+  scache: scache unix  -       -       n       -       1       scache
 postfix_main: {}
 postfix_master: {}
 postfix_os_supported: no
