@@ -12,7 +12,7 @@ postfix_whitelist_enabled: False
 postfix_whitelist: None
 default_postfix_main:
   myhostname: "{{ ansible_hostname }}"
-  mydomain: "{{ ansible_hostname }}"
+  mydomain: "{{ ansible_domain | default(None) or 'localdomain' }}"
   myorigin: "{{ ansible_hostname }}"
   mail_owner: "{{ mail_owner }}"
   setgid_group: "{{ setgid_group }}"
