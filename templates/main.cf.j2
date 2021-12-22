@@ -1,5 +1,5 @@
 ## {{ ansible_managed }}
 
-{% for k,v in (default_postfix_main|combine(postfix_main)).iteritems() %}
+{% for k,v in (default_postfix_main|combine(postfix_main)).items() %}
 {{ k }} = {{ v }}
 {% endfor %}
